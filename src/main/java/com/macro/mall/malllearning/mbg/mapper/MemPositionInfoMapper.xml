@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.malllearning.mbg.mapper.MemPositionInfoMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.malllearning.mbg.model.MemPositionInfo">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="EP_ID" jdbcType="BIGINT" property="epId" />
+    <result column="APP_ID" jdbcType="BIGINT" property="appId" />
+    <result column="MEMBER_ID" jdbcType="BIGINT" property="memberId" />
+    <result column="MEMBER_NICK_NAME" jdbcType="VARCHAR" property="memberNickName" />
+    <result column="MEMBER_PHONE" jdbcType="VARCHAR" property="memberPhone" />
+    <result column="CHANNEL_TYPE" jdbcType="INTEGER" property="channelType" />
+    <result column="MAP_TYPE" jdbcType="VARCHAR" property="mapType" />
+    <result column="LONGITUDE" jdbcType="VARCHAR" property="longitude" />
+    <result column="LATITUDE" jdbcType="VARCHAR" property="latitude" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="ACTIVED" jdbcType="BIT" property="actived" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.macro.mall.malllearning.mbg.model.MemPositionInfo">
+    <result column="ADDRESS" jdbcType="LONGVARCHAR" property="address" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, EP_ID, APP_ID, MEMBER_ID, MEMBER_NICK_NAME, MEMBER_PHONE, CHANNEL_TYPE, MAP_TYPE, 
+    LONGITUDE, LATITUDE, REMARK, CREATE_TIME, UPDATE_TIME, ACTIVED
+  </sql>
+  <sql id="Blob_Column_List">
+    ADDRESS
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.macro.mall.malllearning.mbg.model.MemPositionInfoExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from mem_position_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.macro.mall.malllearning.mbg.model.MemPositionInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mem_position_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from mem_position_info
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from mem_position_info
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.macro.mall.malllearning.mbg.model.MemPositionInfoExample">
+    delete from mem_position_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.malllearning.mbg.model.MemPositionInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into mem_position_info (EP_ID, APP_ID, MEMBER_ID, 
+      MEMBER_NICK_NAME, MEMBER_PHONE, CHANNEL_TYPE, 
+      MAP_TYPE, LONGITUDE, LATITUDE, 
+      REMARK, CREATE_TIME, UPDATE_TIME, 
+      ACTIVED, ADDRESS)
+    values (#{epId,jdbcType=BIGINT}, #{appId,jdbcType=BIGINT}, #{memberId,jdbcType=BIGINT}, 
+      #{memberNickName,jdbcType=VARCHAR}, #{memberPhone,jdbcType=VARCHAR}, #{channelType,jdbcType=INTEGER}, 
+      #{mapType,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, #{latitude,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{actived,jdbcType=BIT}, #{address,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.malllearning.mbg.model.MemPositionInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into mem_position_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="epId != null">
+        EP_ID,
+      </if>
+      <if test="appId != null">
+        APP_ID,
+      </if>
+      <if test="memberId != null">
+        MEMBER_ID,
+      </if>
+      <if test="memberNickName != null">
+        MEMBER_NICK_NAME,
+      </if>
+      <if test="memberPhone != null">
+        MEMBER_PHONE,
+      </if>
+      <if test="channelType != null">
+        CHANNEL_TYPE,
+      </if>
+      <if test="mapType != null">
+        MAP_TYPE,
+      </if>
+      <if test="longitude != null">
+        LONGITUDE,
+      </if>
+      <if test="latitude != null">
+        LATITUDE,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="actived != null">
+        ACTIVED,
+      </if>
+      <if test="address != null">
+        ADDRESS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="epId != null">
+        #{epId,jdbcType=BIGINT},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=BIGINT},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="memberNickName != null">
+        #{memberNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberPhone != null">
+        #{memberPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="channelType != null">
+        #{channelType,jdbcType=INTEGER},
+      </if>
+      <if test="mapType != null">
+        #{mapType,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actived != null">
+        #{actived,jdbcType=BIT},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.macro.mall.malllearning.mbg.model.MemPositionInfoExample" resultType="java.lang.Integer">
+    select count(*) from mem_position_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update mem_position_info
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.epId != null">
+        EP_ID = #{record.epId,jdbcType=BIGINT},
+      </if>
+      <if test="record.appId != null">
+        APP_ID = #{record.appId,jdbcType=BIGINT},
+      </if>
+      <if test="record.memberId != null">
+        MEMBER_ID = #{record.memberId,jdbcType=BIGINT},
+      </if>
+      <if test="record.memberNickName != null">
+        MEMBER_NICK_NAME = #{record.memberNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberPhone != null">
+        MEMBER_PHONE = #{record.memberPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelType != null">
+        CHANNEL_TYPE = #{record.channelType,jdbcType=INTEGER},
+      </if>
+      <if test="record.mapType != null">
+        MAP_TYPE = #{record.mapType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.longitude != null">
+        LONGITUDE = #{record.longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.latitude != null">
+        LATITUDE = #{record.latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.actived != null">
+        ACTIVED = #{record.actived,jdbcType=BIT},
+      </if>
+      <if test="record.address != null">
+        ADDRESS = #{record.address,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update mem_position_info
+    set ID = #{record.id,jdbcType=BIGINT},
+      EP_ID = #{record.epId,jdbcType=BIGINT},
+      APP_ID = #{record.appId,jdbcType=BIGINT},
+      MEMBER_ID = #{record.memberId,jdbcType=BIGINT},
+      MEMBER_NICK_NAME = #{record.memberNickName,jdbcType=VARCHAR},
+      MEMBER_PHONE = #{record.memberPhone,jdbcType=VARCHAR},
+      CHANNEL_TYPE = #{record.channelType,jdbcType=INTEGER},
+      MAP_TYPE = #{record.mapType,jdbcType=VARCHAR},
+      LONGITUDE = #{record.longitude,jdbcType=VARCHAR},
+      LATITUDE = #{record.latitude,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      ACTIVED = #{record.actived,jdbcType=BIT},
+      ADDRESS = #{record.address,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update mem_position_info
+    set ID = #{record.id,jdbcType=BIGINT},
+      EP_ID = #{record.epId,jdbcType=BIGINT},
+      APP_ID = #{record.appId,jdbcType=BIGINT},
+      MEMBER_ID = #{record.memberId,jdbcType=BIGINT},
+      MEMBER_NICK_NAME = #{record.memberNickName,jdbcType=VARCHAR},
+      MEMBER_PHONE = #{record.memberPhone,jdbcType=VARCHAR},
+      CHANNEL_TYPE = #{record.channelType,jdbcType=INTEGER},
+      MAP_TYPE = #{record.mapType,jdbcType=VARCHAR},
+      LONGITUDE = #{record.longitude,jdbcType=VARCHAR},
+      LATITUDE = #{record.latitude,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      ACTIVED = #{record.actived,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.malllearning.mbg.model.MemPositionInfo">
+    update mem_position_info
+    <set>
+      <if test="epId != null">
+        EP_ID = #{epId,jdbcType=BIGINT},
+      </if>
+      <if test="appId != null">
+        APP_ID = #{appId,jdbcType=BIGINT},
+      </if>
+      <if test="memberId != null">
+        MEMBER_ID = #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="memberNickName != null">
+        MEMBER_NICK_NAME = #{memberNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberPhone != null">
+        MEMBER_PHONE = #{memberPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="channelType != null">
+        CHANNEL_TYPE = #{channelType,jdbcType=INTEGER},
+      </if>
+      <if test="mapType != null">
+        MAP_TYPE = #{mapType,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        LONGITUDE = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        LATITUDE = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actived != null">
+        ACTIVED = #{actived,jdbcType=BIT},
+      </if>
+      <if test="address != null">
+        ADDRESS = #{address,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.macro.mall.malllearning.mbg.model.MemPositionInfo">
+    update mem_position_info
+    set EP_ID = #{epId,jdbcType=BIGINT},
+      APP_ID = #{appId,jdbcType=BIGINT},
+      MEMBER_ID = #{memberId,jdbcType=BIGINT},
+      MEMBER_NICK_NAME = #{memberNickName,jdbcType=VARCHAR},
+      MEMBER_PHONE = #{memberPhone,jdbcType=VARCHAR},
+      CHANNEL_TYPE = #{channelType,jdbcType=INTEGER},
+      MAP_TYPE = #{mapType,jdbcType=VARCHAR},
+      LONGITUDE = #{longitude,jdbcType=VARCHAR},
+      LATITUDE = #{latitude,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      ACTIVED = #{actived,jdbcType=BIT},
+      ADDRESS = #{address,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.macro.mall.malllearning.mbg.model.MemPositionInfo">
+    update mem_position_info
+    set EP_ID = #{epId,jdbcType=BIGINT},
+      APP_ID = #{appId,jdbcType=BIGINT},
+      MEMBER_ID = #{memberId,jdbcType=BIGINT},
+      MEMBER_NICK_NAME = #{memberNickName,jdbcType=VARCHAR},
+      MEMBER_PHONE = #{memberPhone,jdbcType=VARCHAR},
+      CHANNEL_TYPE = #{channelType,jdbcType=INTEGER},
+      MAP_TYPE = #{mapType,jdbcType=VARCHAR},
+      LONGITUDE = #{longitude,jdbcType=VARCHAR},
+      LATITUDE = #{latitude,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      ACTIVED = #{actived,jdbcType=BIT}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
