@@ -2,8 +2,8 @@ package com.macro.mall.malllearning.service.impl;
 
 import com.macro.mall.malllearning.common.utils.JwtTokenUtil;
 import com.macro.mall.malllearning.component.MyPasswordEncoder;
-import com.macro.mall.malllearning.dao.UmsAdminRoleRelationDao;
 import com.macro.mall.malllearning.mbg.mapper.UmsAdminMapper;
+import com.macro.mall.malllearning.mbg.mapper.UmsAdminRoleRelationMapper;
 import com.macro.mall.malllearning.mbg.model.UmsAdmin;
 import com.macro.mall.malllearning.mbg.model.UmsAdminExample;
 import com.macro.mall.malllearning.mbg.model.UmsPermission;
@@ -19,7 +19,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -45,7 +44,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     @Resource
     private UmsAdminMapper adminMapper;
     @Resource
-    private UmsAdminRoleRelationDao adminRoleRelationDao;
+    private UmsAdminRoleRelationMapper adminRoleRelationMapper;
 
     @Override
     public UmsAdmin getAdminByUsername(String username) {
@@ -86,7 +85,8 @@ public class UmsAdminServiceImpl implements UmsAdminService {
             if (!passwordEncoder.matches(password, userDetails.getPassword())) {
                 throw new BadCredentialsException("密码不正确");
             }
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+            UsernamePasswordAuthenticationToken authentication =
+                    new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
             token = jwtTokenUtil.generateToken(userDetails);
         } catch (AuthenticationException e) {
@@ -98,6 +98,8 @@ public class UmsAdminServiceImpl implements UmsAdminService {
 
     @Override
     public List<UmsPermission> getPermissionList(Long adminId) {
-        return adminRoleRelationDao.getPermissionList(adminId);
+
+        return adminRoleRelationMapper.getPermissionList(adminId);
     }
+
 }

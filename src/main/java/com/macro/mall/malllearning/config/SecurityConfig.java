@@ -6,7 +6,6 @@ import com.macro.mall.malllearning.component.RestfulAccessDeniedHandler;
 import com.macro.mall.malllearning.dto.AdminUserDetails;
 import com.macro.mall.malllearning.mbg.model.UmsAdmin;
 import com.macro.mall.malllearning.mbg.model.UmsPermission;
-import com.macro.mall.malllearning.service.UmsAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;

@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://10.0.27.37:3306/cdp_member_test
-    username: cdp_project_test_admin
-    password: RchX7ymt03zA
+    url: jdbc:mysql://127.0.0.1:3306/mall
+    username: root
+    password: 11111111
   redis:
     host: localhost
     database: 0
