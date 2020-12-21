@@ -33,6 +33,7 @@ public class UmsMemberServiceImpl implements UmsMemberService {
             sb.append(random.nextInt(10));
         }
         redisService.set(REDIS_KEY_PREFIX_AUTH_CODE + telePhone, sb.toString());
+        String s = redisService.get(REDIS_KEY_PREFIX_AUTH_CODE + telePhone);
         redisService.expire(REDIS_KEY_PREFIX_AUTH_CODE + telePhone, Long.valueOf(REDIS_KEY_EXPIRE_AUTH_CODE));
 
         return CommonResult.success(sb.toString(), "获取验证码成功");
@@ -45,10 +46,9 @@ public class UmsMemberServiceImpl implements UmsMemberService {
         }
         String realAuthcode = redisService.get(REDIS_KEY_PREFIX_AUTH_CODE + telephone);
         if (authCode.equals(realAuthcode)) {
-            CommonResult.success(null, "验证成功");
+            return CommonResult.success(null, "验证成功");
         } else {
-            CommonResult.failed("验证码不正确");
+            return CommonResult.failed("验证码不正确");
         }
-        return null;
     }
 }

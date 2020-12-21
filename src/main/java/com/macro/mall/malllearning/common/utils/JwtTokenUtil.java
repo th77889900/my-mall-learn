@@ -6,8 +6,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.support.SimpleTriggerContext;
-import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.scheduling.support.SimpleTriggerContext;
+//import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.xml.crypto.Data;
@@ -65,10 +65,10 @@ public class JwtTokenUtil {
         return username;
     }
 
-    public boolean validateToken(String token, UserDetails userDetails) {
-        String username = getUsernameFromToken(token);
-        return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
-    }
+//    public boolean validateToken(String token, UserDetails userDetails) {
+//        String username = getUsernameFromToken(token);
+//        return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
+//    }
 
 
     /**
@@ -90,12 +90,12 @@ public class JwtTokenUtil {
     /**
      * 根据用户信息生成token
      */
-    public String generateToken(UserDetails userDetails) {
-        Map<String, Object> claims = new HashMap<>();
-        claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
-        claims.put(CLAIM_KEY_CREATED, new Date());
-        return generateToken(claims);
-    }
+//    public String generateToken(UserDetails userDetails) {
+//        Map<String, Object> claims = new HashMap<>();
+//        claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
+//        claims.put(CLAIM_KEY_CREATED, new Date());
+//        return generateToken(claims);
+//    }
 
     /**
      * 判断token是否可以被刷新

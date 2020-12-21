@@ -29,7 +29,7 @@ public interface UmsAdminService {
      * @param password 密码
      * @return 生成的JWT的token
      */
-    String login(String username, String password);
+//    String login(String username, String password);
 
     /**
      * 获取用户所有权限（包括角色权限和+-权限）
