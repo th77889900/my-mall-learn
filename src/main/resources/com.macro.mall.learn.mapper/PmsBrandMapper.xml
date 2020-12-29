@@ -13,6 +13,7 @@
     <result column="logo" jdbcType="VARCHAR" property="logo" />
     <result column="big_pic" jdbcType="VARCHAR" property="bigPic" />
   </resultMap>
+
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.macro.mall.learn.mbg.model.PmsBrand">
     <result column="brand_story" jdbcType="LONGVARCHAR" property="brandStory" />
   </resultMap>
