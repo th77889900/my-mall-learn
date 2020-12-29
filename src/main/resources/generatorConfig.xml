@@ -39,7 +39,10 @@
                              targetPackage="com.macro.mall.malllearning.mbg.mapper"
                              targetProject="/Users/macos/IdeaProjects/personal/my-mall-learn/src/main/java"/>
         <!--生成全部表tableName设为%-->
-        <table tableName="ums_admin_role_relation">
+        <table tableName="ums_role">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="ums_admin_permission_relation">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
 
